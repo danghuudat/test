@@ -12,6 +12,7 @@
         $index=$doan->indexbyID($_GET['id']);
         $menu=$index['menu'];
         $data_table=$index['data_table'];
+        $name=$index['name'];
     }
 
 ?>
@@ -98,7 +99,7 @@
 	            	<div class="panel-heading" style="background-color:#337AB7; color:white;" >
 
 	            		<h2 style="margin-top:0px; margin-bottom:0px;"> Danh sách đề tài <?php     if(isset($_GET['id'])){
-	            		        echo"ngành ".$data_table[0]->nganh;
+	            		        echo"ngành ".$name->name;
 
                             }
                             ?></h2>

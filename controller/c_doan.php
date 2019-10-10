@@ -11,7 +11,8 @@ class C_doan{
         $doan=new M_doan();
         $menu=$doan->getmenu();
         $data_Table=$doan->getTablebyID($id);
-        return array('menu'=>$menu,'data_table'=>$data_Table);
+        $name=$doan->getName($id);
+        return array('menu'=>$menu,'data_table'=>$data_Table,'name'=>$name);
     }
 }
 ?>

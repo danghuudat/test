@@ -23,5 +23,11 @@ class M_doan extends database
         $this->setQuery($sql);
         return $this->loadAllRows();
     }
+    function getName($id){
+	    $sql="SELECT * FROM nganh WHERE ID='".$id."'";
+        $this->setQuery($sql);
+        return $this->loadRow(array($id));
+
+    }
 }
  ?>
