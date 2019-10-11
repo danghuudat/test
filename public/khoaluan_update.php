@@ -154,21 +154,20 @@ if(isset($_POST['sinhvien'])){
                 <li  class="list-group-item menu1">
                     <a href="khoa_list.php">Khoa</a>
                 </li>
-
-                <li href="#" class="list-group-item menu1">
-                    Ngành
+                <li  class="list-group-item menu1">
+                    <a href="nganh_list.php">Ngành</a>
                 </li>
-                <li href="nganh_list.php" class="list-group-item menu1">
-                    Bộ môn
+                <li class="list-group-item menu1">
+                    <a href="bomon_list.php">Bộ môn</a>
                 </li>
-                <li href="sinhvien_list" class="list-group-item menu1">
-                    Sinh viên
+                <li class="list-group-item menu1">
+                    <a href="sinhvien_list.php">Sinh viên</a>
                 </li>
-                <li href="giaovien_list.php" class="list-group-item menu1">
-                    Giáo viên
+                <li class="list-group-item menu1">
+                    <a href="giaovien_list.php">Giáo viên</a>
                 </li>
-                <li href="khoaluan_list.php" class="list-group-item menu1">
-                    Khóa luận
+                <li class="list-group-item menu1">
+                    <a href="khoaluan_list.php">Khóa luận</a>
                 </li>
             </ul>
         </div>
