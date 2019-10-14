@@ -6,9 +6,9 @@ class C_nganh{
         $nganh=$m_nganh->getList();
         return array('nganh'=>$nganh);
     }
-    public function check($name){
+    public function check($name,$id){
         $m_nganh=new M_nganh();
-        $nganh=$m_nganh->check($name);
+        $nganh=$m_nganh->check($name,$id);
         return array('isExist'=>$nganh);
     }
     public function add($name,$khoa){

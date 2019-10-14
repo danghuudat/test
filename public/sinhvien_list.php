@@ -131,7 +131,7 @@ if(isset($_GET['deleteid'])){
             </div>
         </div>
     </div>
-    >
+
     <!-- end slide -->
 
     <div class="space20"></div>

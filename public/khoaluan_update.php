@@ -23,7 +23,6 @@ $khoaluan= $c_khoaluan->getDetail($_GET['id']);
 
 $khoaluan_detail=$khoaluan['khoaluan'];
 
-
 $c_sinhvien=new C_sinhvien();
 $sinhvien=$c_sinhvien->getList();
 $listSinhVien=$sinhvien['sinhvien'];

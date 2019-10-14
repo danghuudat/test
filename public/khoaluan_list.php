@@ -175,7 +175,7 @@ if(isset($_GET['deleteid'])){
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-heading" style="background-color:#337AB7; color:white;">
-                    <h2 style="margin-top:0px; margin-bottom:0px;"> Danh sách ngành </h2>
+                    <h2 style="margin-top:0px; margin-bottom:0px;"> Danh sách khóa luận </h2>
                 </div>
             </div>
             <div class="panel-body" style="box-sizing: border-box;border: 1px solid rgb(221,221,221)">

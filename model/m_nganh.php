@@ -6,10 +6,10 @@ class M_nganh extends database{
         $this->setQuery($sql);
         return $this->loadAllRows();
     }
-    public function check($name){
-        $sql="SELECT * FROM nganh where name='".$name."'";
+    public function check($name,$id){
+        $sql="SELECT * FROM nganh where name='".$name."' AND ID not like '".$id."'";
         $this->setQuery($sql);
-        return $this->loadRow(array($name));
+        return $this->loadRow(array($name,$id));
     }
     public function add($name,$khoa){
         $sql="INSERT INTO nganh (name,khoa_id) values('".$name."','".$khoa."')";
@@ -17,7 +17,7 @@ class M_nganh extends database{
         return $this->execute(array($name,$khoa));
     }
     public function getDetail($id){
-        $sql="SELECT nganh.ID as nganh_id, nganh.name as tennganh, khoa.name, nganh.khoa_id as khoa FROM nganh inner join khoa on nganh.khoa_id=khoa.ID where nganh.ID='".$id."'";
+        $sql="SELECT nganh.ID as nganh_id, nganh.name as tennganh, khoa.name as tenkhoa, nganh.khoa_id as khoa FROM nganh inner join khoa on nganh.khoa_id=khoa.ID where nganh.ID='".$id."'";
         $this->setQuery($sql);
         return $this->loadRow(array($id));
     }

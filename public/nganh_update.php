@@ -1,20 +1,29 @@
 <?php
 session_start();
-include('../controller/c_nganh.php');
-include('../controller/c_khoa.php');
 if(!isset($_SESSION['user_name'])){
     header("location:dangnhap.php");
 }
-
-$c_nganh= new C_nganh();
-$nganh=$c_nganh->getList();
-$listNganh=$nganh['nganh'];
-
+include('../controller/c_khoa.php');
+include('../controller/c_nganh.php');
 
 $c_khoa=new C_khoa();
 $khoa=$c_khoa->getListKhoa();
 $listKhoa=$khoa['khoa'];
+$c_nganh=new C_nganh();
+$nganh=$c_nganh->getDetail($_GET['id']);
+$nganhDetail=$nganh['nganh'];
 
+if(isset($_POST['nganh'])){
+    $isExist=$c_nganh->check($_POST['khoa'],$_POST['id']);
+
+    if(!$isExist['isExist']){
+        $newnganh=$c_nganh->update($_POST['id'],$_POST['nganh'],$_POST['khoa']);
+        header("Refresh:0");
+    }
+    else{
+        $exist="tên ngành đã tồn tại";
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -145,60 +154,35 @@ $listKhoa=$khoa['khoa'];
         </div>
 
         <div class="col-md-9">
-            <div class="panel panel-default">
-                <div class="panel-heading" style="background-color:#337AB7; color:white;">
-                    <h2 style="margin-top:0px; margin-bottom:0px;"> Danh sách ngành </h2>
-                </div>
-            </div>
-            <div class="panel-body" style="box-sizing: border-box;border: 1px solid rgb(221,221,221)">
-                <table id="khoaTable" class="table table-striped table-bordered" cellspacing="0" >
-                    <thead>
-                    <tr>
-                        <td>STT</td>
-                        <td>Tên ngành</td>
-                        <td>Khoa</td>
-                        <td></td>
-                    </tr>
-                    </thead>
-                    <tbody>
+            <?php
+            if(isset($isExist)){
+                echo "<div class='alert alert-danger'>Tên ngành đã tồn tại</div>";
+            }
+            ?>
+            <form method="POST" action="#">
+                <input name="id" type="hidden" value="<?php echo $nganhDetail->nganh_id;?>">
+                <label for="khoa">Tên khoa</label>
+
+                <select id="khoa" name="khoa" class="form-control">
                     <?php
-                    $i=1;
-                    foreach ($listNganh as $record){
-                        echo"<tr>";
-                        echo"<td>".$i."</td>";
-                        echo"<td>".$record->tennganh."</td>";
-                        echo"<td>".$record->khoa."</td>";
-                        echo"<td><a href='nganh_update.php?id=".$record->nganh_id."'>update</a></td>";
-                        echo"</tr>";
-                        $i++;
+                    foreach ($listKhoa as $record){
+                        if($record->name==$nganhDetail->tenkhoa){
+                            echo "<option value='".$record->ID."' selected>".$record->name."</option>";
+                        }
+                        else{
+                            echo "<option value='".$record->ID."'>".$record->name."</option>";
+
+                        }
                     }
                     ?>
-                    </tbody>
-                </table>
+                </select>
 
-            </div>
-            <div class="panel-body" style="box-sizing: border-box;border: 1px solid rgb(221,221,221)">
-                <?php
-                if (isset($exist)){
-                    echo"<div class='alert alert-danger'>Ngành tồn tại</div>";
-                }
-                ?>
+                <label for="nganh">Tên ngành</label>
 
-                <form method="POST" action="#">
-                    <label for="nganh">Tên ngành</label>
-                    <input class="form-control" type="text" name="nganh" id="nganh" placeholder="Tên ngành" required><br>
+                <input type="text" placeholder="<?php echo $nganhDetail->tennganh;?>" name="nganh" id="nganh" class="form-control" required>
 
-                    <select name="khoa" class="form-control">
-                        <?php
-                        foreach ($listKhoa as $bm){
-                            echo"<option value='".$bm->ID."'>".$bm->name."</option>";
-                        }
-                        ?>
-                    </select>
-                    <br>
-                    <button type="submit" class="btn">Thêm ngành</button>
-                </form>
-            </div>
+                <button type="submit" class="btn btn-primary">Sửa</button>
+            </form>
         </div>
     </div>
     <!-- /.row -->
@@ -218,21 +202,9 @@ $listKhoa=$khoa['khoa'];
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 <!-- Bootstrap Core JavaScript -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-
 <script src="js/bootstrap.min.js"></script>
 <script src="js/my.js"></script>
 
 </body>
-<script>
-    $(document).ready(function() {
-        // Setup - add a text input to each footer cell
-        // DataTable
-        var table = $('#khoaTable').DataTable();
 
-        // Apply the search
-    } );
-</script>
 </html>
