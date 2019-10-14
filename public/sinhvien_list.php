@@ -238,7 +238,7 @@ if(isset($_GET['deleteid'])){
                     </select>
 
                     <br>
-                    <button type="submit" class="btn">Thêm ngành</button>
+                    <button type="submit" class="btn">Thêm sinh viên</button>
                 </form>
             </div>
         </div>

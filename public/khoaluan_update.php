@@ -35,7 +35,7 @@ if(isset($_POST['sinhvien'])){
     $isExist=$c_khoaluan->checkforupdate($_POST['sinhvien'],$_POST['id']);
 
     if($isExist['isExist']==false){
-        $newkhoaluan=$c_khoaluan->update($_POST['detai'],$_POST['sinhvien'],$_POST['giaovien'],$_POST['bailam'],$_POST['diem'],$_POST['id']);
+        $newkhoaluan=$c_khoaluan->update($_POST['detai'],$_POST['giaovien'],$_POST['sinhvien'],$_POST['bailam'],$_POST['diem'],$_POST['id']);
     }
     else{
         $exist="sinh viên đã làm khóa luận";

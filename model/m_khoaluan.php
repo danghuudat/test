@@ -44,7 +44,6 @@ class M_khoaluan extends database {
     }
     public function update($tendetai,$id_giaovien,$idSinhvien,$bailam,$diem,$id){
         $sql="UPDATE luanvan SET tendetai='".$tendetai."',ID_giaovien='".$id_giaovien."', ID_sinhvien='".$idSinhvien."',bailam='".$bailam."', diem='".$diem."' WHERE ID='".$id."'";
-
         $this->setQuery($sql);
         return $this->execute(array($tendetai,$id_giaovien,$idSinhvien,$bailam,$diem,$id));
     }
