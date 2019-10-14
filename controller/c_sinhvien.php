@@ -1,5 +1,7 @@
 <?php
 include_once('../model/m_sinhvien.php');
+include_once('../model/m_khoaluan.php');
+
 class C_sinhvien{
     public function getList(){
         $m_sinhvien=new M_sinhvien();
