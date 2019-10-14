@@ -222,7 +222,7 @@ $listGiaovien=$giaovien['giaovien'];*/
                         ?>
                     </select>
                     <br>
-                    <button type="submit" class="btn">Thêm sinh viên</button>
+                    <button type="submit" class="btn">Thêm ngành</button>
                 </form>
             </div>
         </div>

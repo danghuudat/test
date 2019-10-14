@@ -6,10 +6,15 @@ class M_nganh extends database{
         $this->setQuery($sql);
         return $this->loadAllRows();
     }
-    public function check($name,$id){
+    public function checkExist($name,$id){
         $sql="SELECT * FROM nganh where name='".$name."' AND ID not like '".$id."'";
         $this->setQuery($sql);
         return $this->loadRow(array($name,$id));
+    }
+    public function check($name){
+        $sql="SELECT * FROM nganh where name='".$name."'";
+        $this->setQuery($sql);
+        return $this->loadRow(array($name));
     }
     public function add($name,$khoa){
         $sql="INSERT INTO nganh (name,khoa_id) values('".$name."','".$khoa."')";

@@ -14,7 +14,7 @@ $nganh=$c_nganh->getDetail($_GET['id']);
 $nganhDetail=$nganh['nganh'];
 
 if(isset($_POST['nganh'])){
-    $isExist=$c_nganh->check($_POST['khoa'],$_POST['id']);
+    $isExist=$c_nganh->checkExist($_POST['khoa'],$_POST['id']);
 
     if(!$isExist['isExist']){
         $newnganh=$c_nganh->update($_POST['id'],$_POST['nganh'],$_POST['khoa']);
