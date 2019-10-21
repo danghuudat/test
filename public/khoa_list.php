@@ -145,7 +145,10 @@ if(isset($_POST['tenkhoa'])){
                 </li>
                 <li class="list-group-item menu1">
                     <a href="khoaluan_list.php">Khóa luận</a>
-                </li>ng
+                </li>
+                <li class="list-group-item menu1">
+                    <a href="changepassword.php?id=<?php echo $_SESSION['user_id']?>">Đổi mật khẩu</a>
+                </li>
             </ul>
         </div>
 

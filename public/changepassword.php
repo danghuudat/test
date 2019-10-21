@@ -3,20 +3,20 @@ session_start();
 if(!isset($_SESSION['user_name'])){
     header("location:dangnhap.php");
 }
-include('../controller/c_bomon.php');
-$c_bomon=new C_bomon();
-$bomon=$c_bomon->getListBomon();
-$listBomon=$bomon['bomon'];
-if(isset($_POST['tenbomon'])){
-    $isExist=$c_bomon->checkBomon($_POST['tenbomon']);
-    if(!$isExist['isExist']){
-        $newkhoa=$c_bomon->addBoMon($_POST['tenbomon']);
-        header("Refresh:0");
+include('../controller/c_user.php');
+var_dump($_SESSION);
+if(isset($_POST['newpassword'])){
+    if($_POST['newpassword']!=$_POST['repassword']){
+        $notok="Mật khẩu nhập lại không trùng nhau";
     }
     else{
-        $exist="Bộ môn đã tồn tại";
+        $c_user=new C_user();
+        $user=$c_user->doimatkhau(md5($_POST['newpassword']),$_GET['id']);
+        $ok="Đổi mật khẩu thành công";
     }
+
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,9 +64,6 @@ if(isset($_POST['tenbomon'])){
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
-
             <ul class="nav navbar-nav pull-right">
                 <?php
                 if(isset($_SESSION['user_name'])){
@@ -98,6 +95,7 @@ if(isset($_POST['tenbomon'])){
 
 
             </ul>
+
         </div>
 
 
@@ -151,47 +149,23 @@ if(isset($_POST['tenbomon'])){
         </div>
 
         <div class="col-md-9">
-            <div class="panel panel-default">
-                <div class="panel-heading" style="background-color:#337AB7; color:white;">
-                    <h2 style="margin-top:0px; margin-bottom:0px;"> Danh sách bộ môn </h2>
-                </div>
-            </div>
-            <div class="panel-body" style="box-sizing: border-box;border: 1px solid rgb(221,221,221)">
-                <table id="khoaTable" class="table table-striped table-bordered" cellspacing="0" >
-                    <thead>
-                    <tr>
-                        <td>STT</td>
-                        <td>Tên khoa</td>
-                        <td></td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    $i=1;
-                    foreach ($listBomon as $record){
-                        echo"<tr>";
-                        echo"<td>".$i."</td>";
-                        echo"<td>".$record->name."</td>";
-                        echo"<td><a href='bomon_update.php?id=".$record->ID."'>update</a></td>";
-                        echo"</tr>";
-                        $i++;
-                    }
-                    ?>
-                    </tbody>
-                </table>
-
-            </div>
-            <div class="panel-body" style="box-sizing: border-box;border: 1px solid rgb(221,221,221)">
+            <div class="col-md-9">
                 <?php
-                if (isset($exist)){
-                    echo"<div class='alert alert-danger'>Bộ môn tồn tại</div>";
+                if(isset($notok)){
+                    echo "<div class='alert alert-danger'>".$notok."</div>";
+                }
+                else if(isset($ok)){
+                    echo "<div class='alert alert-success'>".$ok."</div>";
                 }
                 ?>
-
-                <form method="post" action="#">
-                    <label for="tenbomon">Tên bô môn</label>
-                    <input class="form-control" type="text" name="tenbomon" id="tenbomon" placeholder="Tên bộ môn"><br>
-                    <button type="submit" class="btn">Thêm bộ môn</button>
+                <form method="POST" action="#">
+                    <label for="newpassword">Mật khẩu mới</label>
+                    <input id="newpassword" class="form-control" type="password" name="newpassword">
+                    <br>
+                    <label for="repassword">Nhập lại mật khẩu</label>
+                    <input id="repassword" class="form-control" type="password" name="repassword">
+                    <br>
+                    <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
                 </form>
             </div>
         </div>
@@ -212,14 +186,16 @@ if(isset($_POST['tenbomon'])){
 <!-- end Footer -->
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
+<script src="js/jquery.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
 
 <script src="js/bootstrap.min.js"></script>
 <script src="js/my.js"></script>
-
 </body>
 <script>
     $(document).ready(function() {

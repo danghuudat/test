@@ -6,5 +6,10 @@ class M_user extends database{
         $this->setQuery($sql);
         return $this->loadRow(array($username,$password));
     }
+    public function doimatkhau($password,$id){
+        $sql="update user SET password='".$password."' WHERE ID='".$id."'";
+        $this->setQuery($sql);
+        return $this->execute(array($password,$id));
+    }
 }
 ?>
